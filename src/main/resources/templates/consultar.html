@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title th:text=${texto}></title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+	crossorigin="anonymous">
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">Spring Boot</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarNav"
+				aria-controls="navbarNav" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav">
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" th:href="@{/registrar}">Registrar</a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/consultar}">Personas</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="container">
+		<form action="#" th:action="@{/actualizar}" th:object="${form}"
+			method="post">
+			<h1 class="text-secondary" th:text=${titulo}></h1>
+			<div
+				class="border border-success border-top-0 border-right-0 border-left-0">
+			</div>
+			<div>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Nombre</th>
+							<th>Apellido</th>
+							<th>Procesado</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="persona, itemStat : *{personas}">
+							<td hidden th:text="${persona.getId()}"></td>
+							<td th:text="${persona.getNombre()}"></td>
+							<td th:text="${persona.getApellido()}"></td>
+							<td th:text="${persona.isProcesado()}"></td>
+							<td><input type="checkbox"
+								th:field="*{personas[__${itemStat.index}__].procesado}"></td>
+							<td><input hidden
+								th:field="*{personas[__${itemStat.index}__].id}"> <input
+								hidden th:field="*{personas[__${itemStat.index}__].nombre}">
+								<input hidden
+								th:field="*{personas[__${itemStat.index}__].apellido}">
+								<input hidden
+								th:field="*{personas[__${itemStat.index}__].procesado}">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<button type="submit">Procesar</button>
+			</div>
+		</form>
+	</div>
+</body>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
+	integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
+	integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc"
+	crossorigin="anonymous"></script>
+</html>
